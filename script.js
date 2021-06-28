@@ -1,3 +1,4 @@
+const bgImage = document.getElementsByClassName('bg-image');
 const image = document.querySelector('img');
 const title = document.getElementById('title');
 const artist = document.getElementById('artist');
@@ -9,6 +10,23 @@ const durationEl = document.getElementById('duration');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
+const shuffleBtn = document.getElementById('shuffle');
+const repeatBtn = document.getElementById('repeat');
+
+// Change background according to the song
+function changeBackground(song) {
+    let imageUrl = `img/${song.name}.jpg`;
+    bgImage[0].style.background = `url(${imageUrl})`;
+    bgImage[0].style.backgroundSize = 'cover';
+    bgImage[0].style.filter = 'blur(20px)';
+}
+
+// Repeat song
+let repeatOn = false;
+repeatBtn.addEventListener('click', function() {
+    repeatBtn.classList.toggle('on-repeat');
+    repeatOn = !repeatOn;
+});
 
 // Musics 
 const songs = [
@@ -57,6 +75,7 @@ function loadSong(song) {
     artist.textContent = song.artist;
     music.src = `music/${song.name}.mp3`;
     image.src = `img/${song.name}.jpg`;
+    changeBackground(song);
 }
 
 // Current Song 
@@ -74,6 +93,9 @@ function prevSong() {
 
 // Next Song 
 function nextSong() {
+    if(repeatOn) {
+        songIndex--;
+    }
     songIndex++;
     if (songIndex > songs.length - 1) {
         songIndex = 0;
@@ -84,6 +106,13 @@ function nextSong() {
 
 // On Load - Select Fisrt Song
 loadSong(songs[songIndex]);
+
+// On Shuffle - Select a random song
+shuffleBtn.addEventListener('click', function() {
+    let randomIndex = Math.floor(Math.random() * 3);
+    loadSong(songs[randomIndex]);
+    playSong();
+});
 
 // Update Progress Bar & Time 
 function updateProgressBar(e) {

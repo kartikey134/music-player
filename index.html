@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="bg-image"></div>
     <div class="player-container">
         <!-- Song -->
         <div class="img-container">
@@ -26,9 +27,11 @@
         </div>
         <!-- Controls -->
         <div class="player-controls">
-            <i class="fas fa-backward" id="prev" title="Previous"></i>
-            <i class="fas fa-play main-button" id="play" title="Play"></i>
-            <i class="fas fa-forward" id="next" title="Next"></i>
+            <i class="ctrl-icon fa fa-random" aria-hidden="true" id="shuffle"></i>
+            <i class="ctrl-icon fa fa-backward" id="prev" title="Previous"></i>
+            <div class="play-btn"><i class="ctrl-icon fa fa-play main-button" id="play" title="Play"></i></div>
+            <i class="ctrl-icon fa fa-forward" id="next" title="Next"></i>
+            <i class="ctrl-icon fa fa-redo" id="repeat"></i>
         </div>
     </div>
     <!-- Script -->
